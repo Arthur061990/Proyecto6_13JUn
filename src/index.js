@@ -6,6 +6,8 @@ const path = require('path');
 const bcrypt = require('bcrypt')
 //const { conectar, UsuariosRegistrados } = require('./config');
 const collection = require("./config");
+const jwt = require('jsonwebtoken')
+const cookieParser = require('cookie-parser');
 
  
 // Load environment variables
@@ -13,6 +15,10 @@ dotenv.config()
  
 // SERVER initialization
 const app = express()
+
+const SECRET_KEY = 'your_secret_key';
+
+app.use(cookieParser());
  
 // MIDDLEWARE
 app.use(express.json())
@@ -46,13 +52,35 @@ app.post('/login', async (req, res) => {
                 res.send("No se encuentra el usuario registrado")
             }
             console.log(req.body.password+"-"+check.password)
+            /*const token = jwt.sign({
+                    sub,
+                    name,
+                    exp: Date.now()+60*1000
+                },secret)*/
             if(req.body.password == check.password){
-                console.log("Uusuario valido y password valido")
-                res.sendFile(path.join(__dirname, 'views', 'home.html'), (err) => {
+                /*const token = jwt.sign({
+                    sub,
+                    name,
+                    exp: Date.now()+60*1000
+                },secret)*/
+                // Generar el token JWT
+                const token = jwt.sign({ id: req.body.username }, SECRET_KEY, {
+                    expiresIn: 86400, // 24 horas
+                });
+                console.log("Uusuario valido y password valido token:"+token)
+
+                /*res.sendFile(path.join(__dirname, 'views', 'home.html'), (err) => {
                     if (err) {
                         res.status(500).send(err);
                     }
-                });
+                });*/
+
+                // Adjuntar el token en la respuesta
+                    res.cookie('token', token, { httpOnly: true });
+
+                    // Enviar la respuesta con una indicación de éxito
+                    res.status(200).send({ message: 'Login successful' });
+
             }
             else{
                 res.send("Password incorrecto")
@@ -64,6 +92,26 @@ app.post('/login', async (req, res) => {
     //res.send(`Usuario: ${username}, Contraseña: ${password}`);
 });
 
+
+// Middleware de verificación del token
+const verifyToken = (req, res, next) => {
+    const token = req.cookies.token;
+    if (!token) {
+        return res.status(403).send('No token provided');
+    }
+
+    jwt.verify(token, SECRET_KEY, (err, decoded) => {
+        if (err) {
+            return res.status(500).send('Failed to authenticate token');
+        }
+        req.userId = decoded.id;
+        next();
+    });
+};
+// Ruta protegida de ejemplo
+app.get('/protected', verifyToken, (req, res) => {
+    res.status(200).send('This is a protected route');
+});
 
 // Ruta para servir la página de registro
 app.get('/signup', (req, res) => {
