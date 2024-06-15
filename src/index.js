@@ -37,10 +37,31 @@ app.get('/login', (req, res) => {
 });
 
 // Ruta para manejar el envío del formulario de login
-app.post('/login', (req, res) => {
+app.post('/login', async (req, res) => {
     const { username, password } = req.body;
     // Aquí podrías agregar lógica para manejar el inicio de sesión
-    res.send(`Usuario: ${username}, Contraseña: ${password}`);
+    try{
+        const check = await collection.findOne({name: req.body.username})
+            if(!check){
+                res.send("No se encuentra el usuario registrado")
+            }
+            console.log(req.body.password+"-"+check.password)
+            if(req.body.password == check.password){
+                console.log("Uusuario valido y password valido")
+                res.sendFile(path.join(__dirname, 'views', 'home.html'), (err) => {
+                    if (err) {
+                        res.status(500).send(err);
+                    }
+                });
+            }
+            else{
+                res.send("Password incorrecto")
+            }
+        
+    }catch{
+        res.send("Incorrecto Todo")
+    }
+    //res.send(`Usuario: ${username}, Contraseña: ${password}`);
 });
 
 
