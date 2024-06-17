@@ -20,9 +20,9 @@ router.get('/login', (req, res) => {
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;
     try {
-        const check = await collection.findOne({ name: req.body.username });
+        const check = await collection.findOne({ email: req.body.username });
         if (!check) {
-            return res.status(404).send("No se encuentra el usuario registrado");
+            return res.status(404).send("No se encuentra el correo registrado");
         }
 
         if (req.body.password === check.password) {

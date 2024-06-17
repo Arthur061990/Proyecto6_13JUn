@@ -15,6 +15,10 @@ const Loginschema = new mongoose.Schema({
         type:String,
         required: true
     },
+    email: {
+        type: String,
+        required: true
+    },
     password: {
         type: String,
         required: true
@@ -22,6 +26,6 @@ const Loginschema = new mongoose.Schema({
 });
 
 // collection part
-const collection = new mongoose.model("Usuarios_Registrados", Loginschema);
+const collection = new mongoose.model("usuarios_registrados", Loginschema);
 
 module.exports = collection;
