@@ -1,16 +1,16 @@
-const mongoose = require('mongoose');
+/*const mongoose = require('mongoose');
 const connect = mongoose.connect("mongodb+srv://user:root@cluster0.kjjkelm.mongodb.net/Usuarios");
 
-// Check database connected or not
+// Conexion BD
 connect.then(() => {
     console.log("Database Connected Successfully");
 })
 .catch(() => {
     console.log("Database cannot be Connected");
-})
-
-// Create Schema
-const Loginschema = new mongoose.Schema({
+})*/
+const mongoose = require('mongoose')
+// Modelo de Usuario
+const userSchema = new mongoose.Schema({
     name: {
         type:String,
         required: true
@@ -25,7 +25,7 @@ const Loginschema = new mongoose.Schema({
     }
 });
 
-// collection part
-const collection = new mongoose.model("usuarios_registrados", Loginschema);
 
-module.exports = collection;
+const user_model = new mongoose.model("usuarios_registrados", userSchema);
+
+module.exports = user_model;

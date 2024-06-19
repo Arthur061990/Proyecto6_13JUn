@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 // Clave secreta para firmar el JWT. En producción, deberías almacenar esto de manera segura.
-const SECRET_KEY = 'your_secret_key';
+const SECRET_KEY = process.env.SECRET_KEY;
 
 const verifyToken = (req, res, next) => {
     const token = req.cookies.token;
