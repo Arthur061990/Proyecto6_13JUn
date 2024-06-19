@@ -8,15 +8,18 @@ const collection = require("./models/user");
 const jwt = require('jsonwebtoken')
 const cookieParser = require('cookie-parser');
 //const connect = mongoose.connect(process.env.MONGODB_URL);
-
+// Express Server
+const app = express()
 //console.log("URL: "+process.env.MONGODB_URL)
-
+// MIDDLEWARE
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
  
 // Variables Entorno
 dotenv.config()
 const connect = mongoose.connect(process.env.MONGODB_URL);
-// Express Server
-const app = express()
+
 
 //Secret Key para WEb Token
 const SECRET_KEY = process.env.SECRET_KEY;

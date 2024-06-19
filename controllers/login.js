@@ -41,10 +41,16 @@ router.post('/login', async (req, res) => {
 
 async function pagina_login (req, res) {
     //res.json({ mensaje: "Bienvenido a la pagina BD Mongoose" });
-    const { username, password } = req.body;
+    //const { username, password } = req.body;
+    const { email, password } = req.body;
 
+    // Lógica para manejar el inicio de sesión
+    console.log(`Email: ${email}, Password: ${password}`);
 
     try {
+        console.log("email: "+req.body.email+"  password: "+req.body.password)
+        const { email, password } = req.body;
+        console.log(email,password)
         const check = await user_model.findOne({ email: req.body.username });
         if (!check) {
             return res.status(404).send("No se encuentra el correo registrado");
