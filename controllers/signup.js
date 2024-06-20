@@ -1,17 +1,11 @@
 const express = require('express');
 const path = require('path');
+const jwt = require('jsonwebtoken');
+//const collection = require("../config"); 
 const router = express.Router();
 const user_model = require(('../models/user')); 
 
-// Ruta para servir la página de registro
-/*
-router.get('/signup', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'views', 'signup.html'), (err) => {
-        if (err) {
-            res.status(500).send(err);
-        }
-    });
-});*/
+
 
 async function pagina_signup (req, res) {
 
