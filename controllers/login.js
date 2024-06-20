@@ -13,7 +13,7 @@ async function pagina_login (req, res) {
     //res.json({ mensaje: "Bienvenido a la pagina BD Mongoose" });
     //const { username, password } = req.body;
     const { email, password } = req.body;
-
+    const email1 = req.body.email;
     
     
 
@@ -28,7 +28,7 @@ async function pagina_login (req, res) {
 
         if (req.body.password === check.password) {
             // Generar el token JWT
-            const token = jwt.sign({ id: req.body.username }, SECRET_KEY, {
+            const token = jwt.sign({ id: email1 }, SECRET_KEY, {
                 expiresIn: 86400, // 24 horas
             });
 
