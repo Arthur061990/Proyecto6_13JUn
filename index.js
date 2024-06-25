@@ -7,6 +7,7 @@ const bcrypt = require('bcrypt')
 const collection = require("./models/user");
 const jwt = require('jsonwebtoken')
 const cookieParser = require('cookie-parser');
+const cors = require("cors")
 //const connect = mongoose.connect(process.env.MONGODB_URL);
 // Express Server
 const app = express()
@@ -15,6 +16,7 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(cors());
  
 // Variables Entorno
 dotenv.config()
