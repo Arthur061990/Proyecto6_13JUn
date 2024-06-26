@@ -18,9 +18,9 @@ async function pagina_login (req, res) {
     
 
     try {
-        //console.log("email: "+req.body.email+"  password: "+req.body.password)
+        console.log("email: "+req.body.email+"  password: "+req.body.password)
         //const { email, password } = req.body;
-        //console.log(email,password)
+        console.log(email,password)
         const check = await user_model.findOne({ email: req.body.email });
         if (!check) {
             return res.status(404).send("No se encuentra el correo registrado");

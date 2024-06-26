@@ -19,7 +19,8 @@ const eliminarProducto = require('../controllers/eliminar_producto');
 // Ruta Home
 router.get("/", homeRouter.pagina_principal);
 // Usa la ruta de login
-router.post('/login',verifyToken, loginRouter.pagina_login);
+//router.post('/login',verifyToken, loginRouter.pagina_login);
+router.post('/login', loginRouter.pagina_login);
 // Usa la ruta de registro
 router.post('/signup', signupRouter.pagina_signup);
 // Usa la ruta de agregar producto

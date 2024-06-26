@@ -23,9 +23,11 @@ async function modificar_password (req, res) {
         console.log('Actualizado correctamente - ', result); 
 
         if (result.nModified === 1) {
-            res.status(200).send('Contraseña modificada correctamente');
-        } else {
+            //res.status(200).send('Contraseña modificada correctamente');
             res.status(400).send('No se pudo modificar la contraseña o no se realizaron cambios');
+        } else {
+            //res.status(400).send('No se pudo modificar la contraseña o no se realizaron cambios');
+            res.status(200).send('Contraseña modificada correctamente');
         }
     } catch (error) {
         console.error('Error actualizando la contraseña:', error); // Mensaje de consola para depuración
