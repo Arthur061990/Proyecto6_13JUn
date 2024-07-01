@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken');
+/*const jwt = require('jsonwebtoken');
 
 // Clave secreta para firmar el JWT. En producción, deberías almacenar esto de manera segura.
 const SECRET_KEY = process.env.SECRET_KEY;
@@ -22,4 +22,29 @@ const verifyToken = (req, res, next) => {
     });
 };
 
+module.exports = verifyToken;*/
+
+const jwt = require('jsonwebtoken');
+
+function verifyToken(req, res, next) {
+    const authHeader = req.headers['authorization'];
+    if (!authHeader) {
+        return res.status(401).send('Acceso denegado. Token no proporcionado.');
+    }
+
+    const token = authHeader.split(' ')[1]; // Bearer <token>
+    if (!token) {
+        return res.status(401).send('Acceso denegado. Token no proporcionado.');
+    }
+
+    try {
+        const verified = jwt.verify(token, process.env.SECRET_KEY); 
+        req.userId = verified.id; 
+        next();
+    } catch (error) {
+        res.status(400).send('Token inválido.');
+    }
+}
+
 module.exports = verifyToken;
+
