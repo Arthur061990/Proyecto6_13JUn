@@ -33,8 +33,10 @@ async function pagina_login (req, res) {
             });
 
             // Adjuntar el token en la respuesta
-            res.cookie('token', token, { httpOnly: true });
-            return res.status(200).send({ message: 'Login successful' });
+            //res.cookie('token', token, { httpOnly: true });
+            res.json({result: token})
+            //return res.status(200).send({ message: 'Login successful' });
+            //res.json({result: token})
         } else {
             return res.status(401).send({ message: 'Password Incorrecto' });
         }
