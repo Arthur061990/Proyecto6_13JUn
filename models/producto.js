@@ -5,11 +5,11 @@ const productSchema = new mongoose.Schema({
         type:String,
         required: true
     },
-    color: {
+    descripcion: {
         type: String,
         required: true
     },
-    modelo: {
+    costo: {
         type: String,
         required: true
     }

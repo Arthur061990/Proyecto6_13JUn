@@ -8,8 +8,8 @@ async function agregar_producto (req, res) {
 
     const data = {
         producto: req.body.producto,
-        color: req.body.color,
-        modelo: req.body.modelo
+        descripcion: req.body.descripcion,
+        costo: req.body.costo
     };
 
     try {
@@ -17,7 +17,7 @@ async function agregar_producto (req, res) {
             console.log("Se agrego el producto: "+add_product);
             res.send('Se agrego el producto');
     } catch (error) {
-        res.status(500).send('Error registering user.');
+        res.status(500).send('Error agregando el producto.');
     }
 };
 

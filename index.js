@@ -50,7 +50,7 @@ app.use(cookieParser());
  
 // SERVER LISTENING
 app.listen( process.env.PORT , () => {
-    console.log('Server is running on port ', process.env.PORT)
+    console.log('Servidor web se ejecuta en el puerto ', process.env.PORT)
 })
 
 module.exports = connect;

@@ -14,6 +14,8 @@ const add_productRouter = require('../controllers/agregar_producto');
 const cambiarPassword = require('../controllers/modificar_password');
 //Definicion de ruta para eliminar producto
 const eliminarProducto = require('../controllers/eliminar_producto');
+//Definicion de ruta para obtener todos los productos
+const obtenerProductos = require('../controllers/obtener_productos');
 
 
 // Ruta Home
@@ -29,5 +31,7 @@ router.post('/agregar_producto', add_productRouter.agregar_producto);
 router.put('/modificar_password', verifyToken, cambiarPassword.modificar_password);
 // Usa la ruta de modificar password
 router.put('/eliminar_producto', eliminarProducto.eliminar_producto);
+// Usa la ruta para obtener todos los productos
+router.get('/obtener_productos', obtenerProductos.obtener_productos);
 
 module.exports=router
