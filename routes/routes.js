@@ -32,6 +32,6 @@ router.put('/modificar_password', verifyToken, cambiarPassword.modificar_passwor
 // Usa la ruta de modificar password
 router.put('/eliminar_producto', eliminarProducto.eliminar_producto);
 // Usa la ruta para obtener todos los productos
-router.get('/obtener_productos', obtenerProductos.obtener_productos);
+router.get('/obtener_productos', verifyToken, obtenerProductos.obtener_productos);
 
 module.exports=router
